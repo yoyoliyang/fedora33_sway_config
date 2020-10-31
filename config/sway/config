@@ -50,7 +50,10 @@ bindsym $mod+Left exec workspace left
 bindsym $mod+Right exec workspace right
 
 # screen lock
-bindsym Control+Mod1+l exec swaylock -f -c 000000
+bindsym Control+Mod1+l exec swaylock -f -c 000000 
+
+# screenshot
+bindsym $mod+Shift+s exec screenshot.sh
 
 # Your preferred terminal emulator
 set $term env WINIT_UNIX_BACKEND=x11 alacritty
@@ -62,9 +65,9 @@ output * bg ~/wp.jpg fill
 #
 # Example configuration:
 #
-# 显示器绑定
-output DP-1 resolution 1920x1080 position 0,0
-output VGA-1 resolution 1440x900 position 1921,0
+# 多显示器绑定
+# output DP-1 resolution 1920x1080 position 0,0
+# output VGA-1 resolution 1440x900 position 1920,0
 workspace 1 output DP-1
 workspace 10 output VGA-1
 #
