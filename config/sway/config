@@ -27,20 +27,27 @@ exec --no-startup-id export QT_IM_MODULE=fcitx
 exec --no-startup-id export XMODIFIERS=@im=fcitx
 exec --no-startup-id fcitx
 # exec --no-startup-id ibus-daemon --xim -d -r
+#
+# bluetooth
+# 连接蓝牙方糖音箱
+exec --no-startup-id bluetooth.sh
 
 # window fonts setting
 title_align center
 font pango:WenQuanYi Zen Hei 11
 
 # volume
-bindsym XF86AudioRaiseVolume exec amixer -c 1 set Master playback 2+
-bindsym XF86AudioLowerVolume exec amixer -c 1 set Master playback 2-
-bindsym XF86AudioMute exec amixer_toggle.py
+bindsym XF86AudioRaiseVolume exec volume_controller.sh up
+bindsym XF86AudioLowerVolume exec volume_controller.sh down
+bindsym XF86AudioMute exec volume_controller.sh toggle
 # start a terminal
 bindsym $mod+t exec $term 
 bindsym $mod+b exec google-chrome
 # kill focused window
 bindsym Control+Mod1+w kill
+
+# 休眠
+bindsym Control+Mod1+p exec systemctl suspend
 
 # exit i3 
 bindsym Control+Mod1+e exec swaynag -t warning -m '确定要退出sway吗？' -b '朕要起驾！' 'swaymsg exit' --font 'pango:WenQuanYi Zen Hei 20'
@@ -66,8 +73,8 @@ output * bg ~/wp.jpg fill
 # Example configuration:
 #
 # 多显示器绑定
-# output DP-1 resolution 1920x1080 position 0,0
-# output VGA-1 resolution 1440x900 position 1920,0
+#output DP-1 resolution 1920x1080 position 0,0
+#output VGA-1 resolution 1440x900 position 1920,0
 workspace 1 output DP-1
 workspace 10 output VGA-1
 #
@@ -78,8 +85,8 @@ workspace 10 output VGA-1
 # Example configuration:
 #
 exec swayidle -w \
-          timeout 300 'swaylock -f -c 000000' \
-          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          timeout 10800 'swaylock -f -c 000000' \
+          timeout 10800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
           before-sleep 'swaylock -f -c 000000'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
